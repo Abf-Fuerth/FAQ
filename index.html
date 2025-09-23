@@ -12545,7 +12545,7 @@ summary.category-title .dd-icon {
 <div id="verteilstellen">
 <label for="vsSearch" style="display:block;margin:8px 0 6px;">Suchen (PLZ oder Stadtteil ):</label>
 <div class="vs-bar">
-<input aria-label="Verteilstellen Suche" id="vsSearch" placeholder="nur PLZ oder Stadtteil möglich " type="text"/>
+<input aria-label="Verteilstellen Suche" id="vsSearch" placeholder="Suche nur mit PLZ oder Stadtteil möglich " type="text"/>
 <button id="vsClear" title="Eingabe löschen" type="button">✕</button>
 </div>
 <select aria-label="Verteilstelle auswählen" id="vsSelect" size="1"></select>
@@ -12569,7 +12569,7 @@ summary.category-title .dd-icon {
 <div class="question" onclick="toggleAnswer('sp2')">Was kostet die Abholung?</div>
 <div class="answer" id="sp2">20 € pro Anfahrt.</div>
 <div class="question" onclick="toggleAnswer('sp3')">Welche Abholzeiträume gibt es und kann dieser begrenzt werden?</div>
-<div class="answer" id="sp3">06:30 bis 12:00 oder 10:00 bis 15:00 Uhr. Er kann nicht begrenzt werden, da der Fahrer seine Tour selber einteilt. Eine Benachrichtigung durch den Fahrer kann 30 Minuten vor der Abholung erfolgen wenn es beantragt ist und eine Rufnummer im Antrag hinterlegt ist.  </div>
+<div class="answer" id="sp3">06:30 bis 12:00 oder 10:00 bis 15:00 Uhr. Er kann nicht begrenzt werden, da der Fahrer seine Tour selber einteilt. Im Antrag kann eine Rufnummer angegeben werden, sodass der Fahrer etwa 30 Minuten vor der Abholung eine Benachrichtigung geben kann.  </div>
 <div class="question" onclick="toggleAnswer('sp4')">Muss ich persönlich vor Ort sein?</div>
 <div class="answer" id="sp4">Nein, allerdings muss eine Ansprechperson vor Ort sein, welche auch die 20 Euro bezahlt.</div>
 <div class="question" onclick="toggleAnswer('sp5')">Was ist, wenn Dritte ihren Sperrmüll dazustellen?</div>
@@ -12586,7 +12586,14 @@ summary.category-title .dd-icon {
 </div></details><details class="category"><summary class="category-title">🚛 Mülltonnen ▼</summary><div class="faq-section">
 <div class="faq-section" id="faq-muelltonnen">
 <div class="question" onclick="toggleAnswer('mt1')">Wie bestelle ich eine neue Mülltonne?</div>
-<div class="answer" id="mt1">Wichtig: Kann nur Eigentümer! Über das Onlinecontainerverwaltungsprogramm - https://www.fuerth.de/service-fuerther-rathaus/dienstleistungen/detail/abfall-entsorgung-2344/- oder in Ausnahmefällen per E-Mail muelltonnen@fuerth.de .</div>
+<div class="answer" id="mt1">
+  Wichtig: Kann nur Eigentümer! Über das Onlinecontainerverwaltungsprogramm – 
+  <a href="https://www.fuerth.de/service-fuerther-rathaus/dienstleistungen/detail/abfall-entsorgung-2344/" target="_blank">
+    Onlinecontainerverwaltung Fürth
+  </a>
+  – oder in Ausnahmefällen per E-Mail 
+  <a href="mailto:muelltonnen@fuerth.de">muelltonnen@fuerth.de</a>.
+</div>
 <div class="question" onclick="toggleAnswer('mt2')">Was tun bei beschädigter Tonne?</div>
 <div class="answer" id="mt2">Wichtig: Kann auch der Mieter beantragen! Online über das Containerverwaltungsprogramm melden oder telefonisch. Hierbei ist wichtig, dass man die Art, Größe, Adresse notiert und hinweißt, dass die Tonne nicht versperrt sein darf und frei zugänglich hingestellt werden muss.</div>
 <div class="question" onclick="toggleAnswer('mt3')">Vermisste Tonnen?</div>
@@ -12613,7 +12620,7 @@ summary.category-title .dd-icon {
 <div class="question" onclick="toggleAnswer('ws3')">Wann ist der Kompostplatz Burgfarrnbach geöffnet?</div>
 <div class="answer" id="ws3">Mo–Mi u. Fr 8–12 Uhr u. 12:45-16 Uhr, Sa 8–13 Uhr. Donnerstags geschlossen</div>
 <div class="question" onclick="toggleAnswer('ws4')">Was kann ich dort abgeben?</div>
-<div class="answer" id="ws4">Auf das Abfall-ABC verweisen</div>
+<div class="answer" id="ws4">Auf das Abfall-ABC verweisen und Abgabemengen beachten</div>
 </div>
 </div></details>
 <details class="category">
@@ -12635,7 +12642,7 @@ summary.category-title .dd-icon {
       Wie kann ich meine Adresse ändern?
     </div>
     <div class="answer" id="ag2">
-      Bitte wenden Sie sich an das Bürgeramt oder die Abfallwirtschaft.
+      Bitte wenden Sie sich an das Bürgeramt.
     </div>
 
   </div>
