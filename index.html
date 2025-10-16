@@ -13034,5 +13034,110 @@ Sollte es auch beim zweiten Mal nicht möglich sein, die Tonnen zu leeren, wird 
     init();
   });
   </script>
+
+<!-- === Auto Google Maps links for Verteilstellen (enhanced) === -->
+<style>
+  /* Maps-Link Styling (light/dark aware via CSS variables) */
+  .vs-map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 0%, var(--card));
+    text-decoration: none;
+    font-size: .95rem;
+    line-height: 1.2;
+    transition: background .25s ease, color .25s ease, border-color .25s ease, transform .15s ease;
+    will-change: transform;
+  }
+  .vs-map-link:hover {
+    background: color-mix(in srgb, var(--accent) 14%, var(--card));
+    color: #fff;
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .vs-map-link:active {
+    transform: translateY(0);
+  }
+  .vs-map-link .pin {
+    font-size: 1.05em;
+  }
+  /* Place the button nicely if .vs-meta is present */
+  .vs-card .vs-meta + .vs-map-link {
+    margin-top: 10px;
+  }
+  /* Responsive: full-width on small screens for easy tapping */
+  @media (max-width: 520px) {
+    .vs-map-link {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+<script>
+  (function () {
+    function extractAddress(card) {
+      // Priority: explicit data-address, then .vs-meta, finally title + meta combo
+      var explicit = card.getAttribute('data-address');
+      if (explicit && explicit.trim()) return explicit.trim();
+      var meta = card.querySelector('.vs-meta');
+      if (meta && meta.textContent.trim()) return meta.textContent.trim();
+      var title = card.querySelector('.vs-title');
+      var combo = [(title && title.textContent) || '', (meta && meta.textContent) || '']
+                  .join(', ').replace(/\s+/g, ' ').trim();
+      return combo;
+    }
+    function addMapLink(card) {
+      if (!card || card.querySelector('.vs-map-link')) return;
+      var addressText = extractAddress(card);
+      if (!addressText) return;
+      var encoded = encodeURIComponent(addressText);
+      var a = document.createElement('a');
+      a.className = 'vs-map-link';
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener noreferrer');
+      a.href = 'https://www.google.com/maps/search/?api=1&query=' + encoded;
+      a.innerHTML = '<span class="pin">📍</span><span>Auf Google&nbsp;Maps ansehen</span>';
+      card.appendChild(a);
+    }
+    function enhanceAll() {
+      var cards = document.querySelectorAll('.vs-card');
+      for (var i = 0; i < cards.length; i++) addMapLink(cards[i]);
+    }
+    // Run now (in case cards are server-rendered)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', enhanceAll);
+    } else {
+      enhanceAll();
+    }
+    // Observe DOM for dynamically added .vs-card
+    var mo = new MutationObserver(function(muts) {
+      for (var i = 0; i < muts.length; i++) {
+        var m = muts[i];
+        // New nodes directly
+        for (var j = 0; j < m.addedNodes.length; j++) {
+          var node = m.addedNodes[j];
+          if (!(node instanceof Element)) continue;
+          if (node.matches && node.matches('.vs-card')) addMapLink(node);
+          // Also check any .vs-card inside newly added subtree
+          var inner = node.querySelectorAll ? node.querySelectorAll('.vs-card') : [];
+          for (var k = 0; k < inner.length; k++) addMapLink(inner[k]);
+        }
+        // If only text changed (e.g., address filled later), try enhanceAll lightly
+        if (m.type === 'characterData' || m.type === 'childList') {
+          if (window.__vsEnhanceTimer) cancelAnimationFrame(window.__vsEnhanceTimer);
+          window.__vsEnhanceTimer = requestAnimationFrame(enhanceAll);
+        }
+      }
+    });
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+  })();
+</script>
+<!-- === /Auto Google Maps links for Verteilstellen (enhanced) === -->
+
 </body>
 </html>
